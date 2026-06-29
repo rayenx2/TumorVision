@@ -1,0 +1,23 @@
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+
+# Data and Models
+data/
+artifacts/
+mlruns/
+predictions.db
+*.db
+
+# Other
+.git/
+.dvc/
+logs/
+temp/

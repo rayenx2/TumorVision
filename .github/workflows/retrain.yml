@@ -1,0 +1,62 @@
+name: Automated MLOps Pipeline
+
+on:
+  workflow_dispatch:
+  # Can be triggered by a webhook from DagsHub when new data is added,
+  # or scheduled to run weekly.
+
+jobs:
+  dvc-repro-and-push:
+    name: DVC Pipeline & Model Evaluation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install dvc dvc-s3 dvc-gdrive huggingface_hub
+
+      - name: Configure DVC credentials (DagsHub)
+        env:
+          DAGSHUB_USERNAME: ${{ secrets.DAGSHUB_USERNAME }}
+          DAGSHUB_TOKEN: ${{ secrets.DAGSHUB_USER_TOKEN }}
+        run: |
+          dvc remote modify origin --local auth basic
+          dvc remote modify origin --local user $DAGSHUB_USERNAME
+          dvc remote modify origin --local password $DAGSHUB_TOKEN
+
+      - name: Run DVC Pipeline (dvc repro)
+        # This step will run model_evaluation.py
+        # If the evaluation gate fails (AUC < threshold), ValueError is raised
+        # and this workflow will fail, preventing the model from reaching production.
+        run: dvc repro
+
+      - name: Push to Hugging Face Hub
+        # This step only runs if dvc repro succeeded (Evaluation Gate passed!)
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          # Update the repo ID to your actual Hugging Face model repository
+          HF_REPO_ID: "Himel000/kidney-tumor-efficientnetb4"
+        run: |
+          huggingface-cli login --token $HF_TOKEN
+          # Push the trained model artifact to HF
+          huggingface-cli upload $HF_REPO_ID artifacts/model_trainer/model.keras model.keras
+
+      - name: Push DVC changes to remote
+        # Push the updated DVC tracking files (dvc.lock) back to git,
+        # and new artifacts (metrics) to DagsHub.
+        run: |
+          dvc push
+          git config --global user.name "GitHub Action"
+          git config --global user.email "action@github.com"
+          git add dvc.lock artifacts/model_evaluation/
+          git commit -m "Auto-update model metrics and dvc.lock [skip ci]" || echo "No changes to commit"
+          git push

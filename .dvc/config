@@ -1,0 +1,5 @@
+[core]
+    remote = origin
+
+[remote "origin"]
+    url = https://dagshub.com/rayenx2/KidneyScan-AI.dvc

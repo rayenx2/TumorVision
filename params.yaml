@@ -1,0 +1,47 @@
+AUGMENTATION:
+  rotation_range: 15
+  width_shift_range: 0.10
+  height_shift_range: 0.10
+  zoom_range: 0.10
+  horizontal_flip: true
+  vertical_flip: false
+  brightness_range: [0.85, 1.15]
+  fill_mode: nearest
+
+TRAINING:
+  # Phase 1 — frozen base, train only custom head
+  phase1_epochs: 10
+  phase1_learning_rate: 0.001
+
+  # Phase 2 — unfreeze last N layers, fine-tune
+  phase2_epochs: 20
+  phase2_learning_rate: 0.0001
+  fine_tune_from_layer: -4         # unfreeze last 4 layers
+
+  batch_size: 32
+  optimizer: adam
+  loss: categorical_crossentropy
+  dropout_rate: 0.50
+  dense_units: 256
+
+CALLBACKS:
+  early_stopping_patience: 5
+  reduce_lr_factor: 0.5
+  reduce_lr_patience: 3
+  reduce_lr_min_lr: 0.000001
+
+EVALUATION:
+  min_auc_threshold: 0.90
+  min_sensitivity_threshold: 0.85
+
+IMAGE:
+  size: 380
+  channels: 3
+  clahe_clip_limit: 2.0
+  clahe_tile_grid_size: [8, 8]
+
+CLASSES:
+  - Cyst
+  - Normal
+  - Stone
+  - Tumor

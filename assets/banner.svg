@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="320" viewBox="0 0 1280 320">
+  <defs>
+    <linearGradient id="bgKidneyScanAI" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0f1e"/>
+      <stop offset="100%" style="stop-color:#0f172a"/>
+    </linearGradient>
+    <linearGradient id="accKidneyScanAI" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#ec4899"/>
+      <stop offset="100%" style="stop-color:#f472b6"/>
+    </linearGradient>
+    <filter id="glowKidneyScanAI" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <pattern id="gridKidneyScanAI" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1e293b" stroke-width="0.5"/>
+    </pattern>
+    <radialGradient id="rgKidneyScanAI" cx="85%" cy="50%" r="40%">
+      <stop offset="0%" style="stop-color:#ec4899;stop-opacity:0.1"/>
+      <stop offset="100%" style="stop-color:#0a0f1e;stop-opacity:0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1280" height="320" fill="url(#bgKidneyScanAI)"/>
+  <rect width="1280" height="320" fill="url(#gridKidneyScanAI)" opacity="0.4"/>
+  <rect width="1280" height="320" fill="url(#rgKidneyScanAI)"/>
+  <rect x="0" y="0" width="1280" height="2" fill="url(#accKidneyScanAI)" opacity="0.7"/>
+  <rect x="0" y="0" width="4" height="320" fill="url(#accKidneyScanAI)"/>
+
+  <g transform="translate(64, 112)" filter="url(#glowKidneyScanAI)">
+    <rect width="96" height="96" rx="16" fill="#ec4899" opacity="0.85"/>
+    <g transform="translate(16, 16) scale(2.67, 2.67)">
+      <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0 1 12 2.944a11.955 11.955 0 0 1-8.618 3.04A12.02 12.02 0 0 0 3 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" fill="none" stroke="#ffffff" stroke-width="1.8"
+            stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+  </g>
+
+  <text x="184" y="158" font-family="'Inter', 'Segoe UI', Arial, sans-serif"
+        font-size="62" font-weight="700" fill="#f1f5f9" letter-spacing="-2">
+    Tumor<tspan fill="url(#accKidneyScanAI)">Vision</tspan>
+  </text>
+
+  <text x="186" y="198" font-family="'Inter', 'Segoe UI', Arial, sans-serif"
+        font-size="17" font-weight="400" fill="#64748b" letter-spacing="0.2">
+    Deep learning CT scan classifier  ·  Grad-CAM explainability  ·  99.46% accuracy
+  </text>
+
+  <line x1="184" y1="218" x2="820" y2="218" stroke="#1e293b" stroke-width="1"/>
+
+  <g transform="translate(184, 236)">
+    <rect width="118" height="34" rx="6" fill="#0f172a" stroke="#1e3a5f" stroke-width="1"/>
+    <text x="59" y="13" font-family="'Inter', 'Segoe UI', Arial, sans-serif"
+          font-size="9" fill="#475569" text-anchor="middle" letter-spacing="1" font-weight="600">99.46% ACCURACY</text>
+    <text x="59" y="27" font-family="'Inter', 'Segoe UI', Arial, sans-serif"
+          font-size="11" fill="#f472b6" text-anchor="middle" font-weight="600">tumor detection</text>
+  </g>
+  <g transform="translate(314, 236)">
+    <rect width="118" height="34" rx="6" fill="#0f172a" stroke="#1e3a5f" stroke-width="1"/>
+    <text x="59" y="13" font-family="'Inter', 'Segoe UI', Arial, sans-serif"
+          font-size="9" fill="#475569" text-anchor="middle" letter-spacing="1" font-weight="600">GRAD-CAM</text>
+    <text x="59" y="27" font-family="'Inter', 'Segoe UI', Arial, sans-serif"
+          font-size="11" fill="#f472b6" text-anchor="middle" font-weight="600">explainable</text>
+  </g>
+  <g transform="translate(444, 236)">
+    <rect width="118" height="34" rx="6" fill="#0f172a" stroke="#1e3a5f" stroke-width="1"/>
+    <text x="59" y="13" font-family="'Inter', 'Segoe UI', Arial, sans-serif"
+          font-size="9" fill="#475569" text-anchor="middle" letter-spacing="1" font-weight="600">UNCERTAINTY</text>
+    <text x="59" y="27" font-family="'Inter', 'Segoe UI', Arial, sans-serif"
+          font-size="11" fill="#f472b6" text-anchor="middle" font-weight="600">quantified</text>
+  </g>
+  <g transform="translate(574, 236)">
+    <rect width="118" height="34" rx="6" fill="#0f172a" stroke="#1e3a5f" stroke-width="1"/>
+    <text x="59" y="13" font-family="'Inter', 'Segoe UI', Arial, sans-serif"
+          font-size="9" fill="#475569" text-anchor="middle" letter-spacing="1" font-weight="600">PYTORCH</text>
+    <text x="59" y="27" font-family="'Inter', 'Segoe UI', Arial, sans-serif"
+          font-size="11" fill="#f472b6" text-anchor="middle" font-weight="600">2.0</text>
+  </g>
+</svg>
